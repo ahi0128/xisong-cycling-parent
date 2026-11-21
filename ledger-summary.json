@@ -1,1 +1,12 @@
-{"year":2026,"reports":[]}
+{
+  "year": 2026,
+  "reports": [
+    {
+      "month": "2026-11",
+      "opening": 355,
+      "income": 1,
+      "expense": 1,
+      "closing": 355
+    }
+  ]
+}
