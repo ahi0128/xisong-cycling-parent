@@ -18,12 +18,13 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <main>
 <header class="hero team-header"><h1>台北市立西松高中自由車隊</h1></header>
 <nav class="parent-nav" aria-label="家長資訊">
-<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#race-calendar">比賽行事曆</a>
+<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a>
 </nav>
 <div id="home" class="parent-panel">
 <a class="card shortcut" href="#team-dues"><strong>隊費說明</strong><span>查看每月隊費與年度概算</span></a>
 <a class="card shortcut" href="#monthly-reports"><strong>收支月報</strong><span>查看已發布的收入、支出與餘額</span></a>
-<a class="card shortcut" href="#race-calendar"><strong>比賽行事曆</strong><span>查比賽日期、報名截止與公告</span></a>
+<a class="card shortcut" href="#team-calendar"><strong>車隊參賽行事曆</strong><span>查看西松確認參加的比賽</span></a>
+<a class="card shortcut" href="#race-calendar"><strong>國內比賽行事曆</strong><span>查比賽日期、報名截止與公告</span></a>
 </div>
 <div id="team-dues" class="parent-panel" hidden>
 <section class="hero">
@@ -74,10 +75,44 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <p>公路與場地賽的公開公告。車隊報名與帶隊安排另行確認。</p>
 <div id="race-events" tabindex="0" role="region" aria-label="賽程表，可左右滑動" aria-live="polite">載入賽程中…</div>
 </section>
+<section class="card parent-panel" id="team-calendar" hidden>
+<h2>車隊參賽行事曆</h2>
+<p>本頁刊登西松自由車隊已確認並公告的參賽行程。</p>
+<div id="team-events" role="status">載入車隊賽程中…</div>
+<p><a href="#race-calendar">查看國內公開賽事與報名資訊</a></p>
+</section>
 </main>
 <script>
+(async()=>{
+ const list=document.getElementById('team-events');
+ try{
+  const result=await fetch('./team-races.json',{cache:'no-store'});
+  if(!result.ok)throw new Error();
+  const {events}=await result.json();
+  const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
+  const upcoming=events.filter(event=>(event.end||event.start)>=today).sort((a,b)=>a.start.localeCompare(b.start));
+  list.textContent=upcoming.length?'':'目前尚無已公告的車隊參賽行程。';
+  if(!upcoming.length)return;
+  const table=document.createElement('table');
+  table.style.width='100%';
+  const head=table.createTHead().insertRow();
+  for(const label of ['日期','賽事','地點']){
+   const cell=document.createElement('th');cell.scope='col';cell.textContent=label;head.append(cell);
+  }
+  const body=table.createTBody();
+  for(const event of upcoming){
+   const row=body.insertRow();
+   row.insertCell().textContent=event.end&&event.end!==event.start?event.start+' 至 '+event.end:event.start;
+   row.insertCell().textContent=event.title;
+   row.insertCell().textContent=event.venue||'待公告';
+  }
+  list.append(table);
+ }catch{list.textContent='暫時無法載入車隊賽程，請連線後重新整理。'}
+})();
+</script>
+<script>
 function showParentPanel(){
- const ids=['home','team-dues','monthly-reports','race-calendar'];
+ const ids=['home','team-dues','monthly-reports','race-calendar','team-calendar'];
  const fragment=location.hash.slice(1);
  const selected=ids.includes(fragment)?fragment:'home';
  for(const id of ids) document.getElementById(id).hidden=id!==selected;
