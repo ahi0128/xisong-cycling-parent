@@ -128,7 +128,15 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <script>
 const trainingPanel = document.getElementById('training');
 const taipeiDay = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
-if (taipeiDay < trainingPanel.dataset.weekStart || taipeiDay > trainingPanel.dataset.weekEnd) {
+const {weekStart,weekEnd}=trainingPanel.dataset;
+const previewStart=new Date(weekStart+'T00:00:00Z');
+previewStart.setUTCDate(previewStart.getUTCDate()-7);
+const previewDay=Number.isFinite(previewStart.getTime())?previewStart.toISOString().slice(0,10):null;
+if(previewDay && taipeiDay >= previewDay && taipeiDay < weekStart){
+ const heading=trainingPanel.querySelector('h2');
+ if(heading)heading.textContent=heading.textContent.replace('訓練公告','下週預排課表');
+ trainingPanel.querySelector('[role="region"]')?.setAttribute('aria-label','下週預排課表');
+}else if(!previewDay || taipeiDay < weekStart || taipeiDay > weekEnd){
  const heading = document.createElement('h2');
  heading.textContent = '訓練公告';
  const message = document.createElement('p');
