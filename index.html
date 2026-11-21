@@ -73,14 +73,14 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
    const title = document.createElement('h3');
    title.textContent = event.title;
    const detail = document.createElement('p');
-   const dates = event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start;
+   const dates = event.displayDate || (event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start);
    detail.textContent = [dates,event.discipline,event.venue,event.status].filter(Boolean).join(' · ');
    article.append(title,detail);
    const url = new URL(event.source);
    if (url.protocol === 'https:') {
     const link = document.createElement('a');
     link.href = url.href;
-    link.textContent = '主辦單位公告';
+    link.textContent = '查看公告來源';
     article.append(link);
    }
    list.append(article);
