@@ -68,7 +68,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <section class="card parent-panel" id="monthly-reports" hidden>
 <h2>已發布的收支月報</h2>
 <div class="tablewrap" id="excel-reports" role="status">載入月報中…</div>
-<p><a href="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary">查閱管理工作站已發布月報</a></p>
+
 </section>
 <section class="card parent-panel" id="race-calendar" hidden>
 <h2>國內比賽行事曆</h2>
@@ -245,11 +245,15 @@ showParentPanel();
   }
   panel.append(table);
   for(const month of [...reports].reverse()){
-   if(!Array.isArray(month.details)||!month.details.length)continue;
-   const disclosure=document.createElement('details');
-   const summary=document.createElement('summary');
-   summary.textContent=month.month+' 已公開交易明細';
-   disclosure.append(summary);
+   const disclosure=document.createElement('section');
+   const heading=document.createElement('h3');
+   heading.textContent=month.month+' 收支明細';
+   disclosure.append(heading);
+   if(!Array.isArray(month.details)||!month.details.length){
+    const note=document.createElement('p');
+    note.textContent='本月已發布收支總額，逐筆用途尚未發布。';
+    disclosure.append(note);panel.append(disclosure);continue;
+   }
    const listing=document.createElement('table');
    const headers=listing.createTHead().insertRow();
    for(const label of ['日期','類型','用途','金額']){
