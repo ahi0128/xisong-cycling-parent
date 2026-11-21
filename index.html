@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./style.css">
 <style>
 main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.amount{font-size:clamp(27px,5vw,42px);font-weight:800;color:#b3f7da;margin-top:12px}.hero a{color:#b3f7da}.actions{margin-top:12px}td:last-child,th:last-child{text-align:right;min-width:100px}td,th{padding:9px}p{margin:8px 0}article{margin-top:14px}@media print{@page{size:A4;margin:12mm}body,main{background:white;margin:0;padding:0;font-size:12px}h1{font-size:25px}h2{font-size:16px}.hero{padding:10px;background:white;color:#10292e;border:1px solid #aaa}.hero p,.amount{color:#10292e}.hero:after,.actions{display:none}.amount{font-size:24px}.card{padding:8px;break-inside:avoid}td,th{padding:5px}p{line-height:1.4}.tablewrap{overflow:visible}section+section{margin-top:7px}}
+#race-events{overflow-x:auto}#race-events table{min-width:710px}#race-events th,#race-events td{text-align:left;vertical-align:top}#race-events tbody tr:nth-child(even){background:#f4f8f7}#race-events td:last-child{min-width:110px}#race-events small{display:block;line-height:1.45;margin-top:4px;color:#405559}#race-events a{display:block;margin-bottom:5px}#race-events .closed{color:#8d3a22}
 </style>
 <link rel="manifest" href="./app.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -54,7 +55,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <section class="card" id="race-calendar">
 <h2>國內比賽行事曆</h2>
 <p>公路與場地賽的公開公告。車隊報名與帶隊安排另行確認。</p>
-<div id="race-events" aria-live="polite">載入賽程中…</div>
+<div id="race-events" tabindex="0" role="region" aria-label="賽程表，可左右滑動" aria-live="polite">載入賽程中…</div>
 </section>
 </main>
 <script>
@@ -68,37 +69,55 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
   const upcoming = events.filter(event => (event.end || event.start) >= today)
    .sort((a,b) => a.start.localeCompare(b.start));
   list.textContent = upcoming.length ? '' : '目前沒有已核實的近期賽程。';
-  for (const event of upcoming) {
-   const article = document.createElement('article');
-   const title = document.createElement('h3');
-   title.textContent = event.title;
-   const detail = document.createElement('p');
-   const dates = event.displayDate || (event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start);
-   detail.textContent = [dates,event.discipline,event.venue,event.status].filter(Boolean).join(' · ');
-   const registration = document.createElement('p');
-   const deadline = event.registrationDeadline;
-   const note = event.registrationNote || (deadline ? '' : '報名期限待公告');
-   const deadlineText = deadline ? '截止 ' + deadline + '（' + (deadline < today ? '已截止' : deadline === today ? '今天截止' : '請留意期限') + '）' : '';
-   registration.textContent = '報名｜' + [deadlineText,note].filter(Boolean).join(' · ');
-   article.append(title,detail,registration);
-   if (event.registrationUrl) {
-    const registrationUrl = new URL(event.registrationUrl);
-    if (registrationUrl.protocol === 'https:') {
-     const registrationLink = document.createElement('a');
-     registrationLink.href = registrationUrl.href;
-     registrationLink.textContent = '報名資訊';
-     registration.append(' · ',registrationLink);
-    }
-   }
-   const url = new URL(event.source);
-   if (url.protocol === 'https:') {
-    const link = document.createElement('a');
-    link.href = url.href;
-    link.textContent = '查看公告來源';
-    article.append(link);
-   }
-   list.append(article);
+  if (!upcoming.length) return;
+  const table = document.createElement('table');
+  const heading = table.createTHead().insertRow();
+  for (const label of ['比賽日期','賽事／類型','地點','報名截止／狀態','報名與公告']) {
+   const th = document.createElement('th');
+   th.scope = 'col';
+   th.textContent = label;
+   heading.append(th);
   }
+  const body = table.createTBody();
+  function link(cell, value, label) {
+   if (!value) return;
+   try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:') return;
+    const anchor = document.createElement('a');
+    anchor.href = url.href;
+    anchor.textContent = label;
+    cell.append(anchor);
+   } catch { /* Skip invalid links. */ }
+  }
+  function note(cell, text) {
+   if (!text) return;
+   const small = document.createElement('small');
+   small.textContent = text;
+   cell.append(small);
+  }
+  for (const event of upcoming) {
+   const row = body.insertRow();
+   row.insertCell().textContent = event.displayDate || (event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start);
+   const name = row.insertCell();
+   const title = document.createElement('strong');
+   title.textContent = event.title;
+   name.append(title);
+   note(name,[event.discipline,event.status].filter(Boolean).join(' · '));
+   row.insertCell().textContent = event.venue || '待公告';
+   const registration = row.insertCell();
+   const deadline = event.registrationDeadline;
+   registration.textContent = deadline || (event.registrationNote ? '' : '待公告');
+   if (deadline) {
+    note(registration,deadline < today ? '已截止' : deadline === today ? '今天截止，請查公告時間' : '請留意期限');
+    if (deadline < today) registration.classList.add('closed');
+   }
+   note(registration,event.registrationNote);
+   const links = row.insertCell();
+   if (event.registrationUrl !== event.source) link(links,event.registrationUrl,'報名頁面');
+   link(links,event.source,event.registrationUrl === event.source ? '規程／註冊資訊' : '賽事公告');
+  }
+  list.append(table);
  } catch { list.textContent = '目前無法載入賽程，請連線後重新整理。'; }
 })();
 </script>
