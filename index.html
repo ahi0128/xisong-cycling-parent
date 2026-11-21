@@ -67,9 +67,8 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 </div>
 <section class="card parent-panel" id="monthly-reports" hidden>
 <h2>已發布的收支月報</h2>
-<p>管理員發布月報後，重新開啟本頁即可查看最新摘要。查看最新月報需要網路。</p>
-<p><a href="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary">直接開啟收支摘要</a></p>
-<iframe title="西松自由車隊已發布的收支月報" src="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary" referrerpolicy="no-referrer" style="display:block;width:100%;height:480px;border:1px solid #dce5e7;border-radius:10px"></iframe>
+<div class="tablewrap" id="excel-reports" role="status">載入月報中…</div>
+<p><a href="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary">查閱管理工作站已發布月報</a></p>
 </section>
 <section class="card parent-panel" id="race-calendar" hidden>
 <h2>國內比賽行事曆</h2>
@@ -214,5 +213,31 @@ showParentPanel();
 })();
 </script>
 <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(console.error);</script>
+<script>
+(async()=>{
+ const panel=document.getElementById('excel-reports');
+ try{
+  const response=await fetch('./ledger-summary.json',{cache:'no-store'});
+  if(!response.ok)throw new Error();
+  const {reports}=await response.json();
+  panel.textContent=reports.length?'':'Excel 帳本目前尚無已發布的月份。';
+  if(!reports.length)return;
+  const table=document.createElement('table');
+  const head=table.createTHead().insertRow();
+  for(const label of ['月份','期初餘額','收入','支出','期末餘額']){
+   const cell=document.createElement('th');
+   cell.scope='col';cell.textContent=label;head.append(cell);
+  }
+  const body=table.createTBody();
+  const formatter=new Intl.NumberFormat('zh-TW',{maximumFractionDigits:2});
+  for(const month of [...reports].reverse()){
+   const row=body.insertRow();
+   row.insertCell().textContent=month.month;
+   for(const key of ['opening','income','expense','closing'])row.insertCell().textContent=formatter.format(month[key])+' 元';
+  }
+  panel.append(table);
+ }catch{panel.textContent='暫時無法載入月報，請連線後重新整理。'}
+})();
+</script>
 </body>
 </html>
