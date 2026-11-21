@@ -18,11 +18,12 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <main>
 <header class="hero team-header"><h1>台北市立西松高中自由車隊</h1></header>
 <nav class="parent-nav" aria-label="家長資訊">
-<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a>
+<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#training">訓練公告</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a>
 </nav>
 <div id="home" class="parent-panel">
 <a class="card shortcut" href="#team-dues"><strong>隊費說明</strong><span>查看每月隊費與年度概算</span></a>
 <a class="card shortcut" href="#monthly-reports"><strong>收支月報</strong><span>查看已發布的收入、支出與餘額</span></a>
+<a class="card shortcut" href="#training"><strong>訓練公告</strong><span>查看本週預排課表</span></a>
 <a class="card shortcut" href="#team-calendar"><strong>車隊參賽行事曆</strong><span>查看西松確認參加的比賽</span></a>
 <a class="card shortcut" href="#race-calendar"><strong>國內比賽行事曆</strong><span>查比賽日期、報名截止與公告</span></a>
 </div>
@@ -81,6 +82,21 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <div id="team-events" role="status">載入車隊賽程中…</div>
 <p><a href="#race-calendar">查看國內公開賽事與報名資訊</a></p>
 </section>
+<section class="card parent-panel" id="training" hidden>
+<h2>訓練公告｜11/23–11/29</h2>
+<p>2026 年 11 月 23 日至 29 日預排課表，整理自 Intervals.icu 訓練週報系統的 11/21 同步資料。實際安排以教練通知為準。</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="本週預排課表">
+<table><thead><tr><th scope="col">日期</th><th scope="col">場地中長距離</th><th scope="col">公路</th></tr></thead><tbody>
+<tr><th scope="row">11/23（一）</th><td>Z2 耐力＋Tempo 3×20 分鐘、體能 60 分鐘</td><td>同左。部分課表安排 Z2 耐力 2 小時</td></tr>
+<tr><th scope="row">11/24（二）</th><td>4×8 分鐘間歇（Seiler 型）</td><td>同左</td></tr>
+<tr><th scope="row">11/25（三）</th><td>Z2 耐力＋6×8 秒衝刺＋高迴轉</td><td>以左列為主，部分課表為 Tempo 2×45 分鐘</td></tr>
+<tr><th scope="row">11/26（四）</th><td>Over-Under 3×12 分鐘、體能 45 分鐘</td><td>以左列為主，部分課表為 MAP 金字塔 2–3–4–3–2 分鐘</td></tr>
+<tr><th scope="row">11/27（五）</th><td>恢復騎 45 分鐘</td><td>同左</td></tr>
+<tr><th scope="row">11/28（六）</th><td>長騎，練習疲勞下衝線</td><td>以左列為主，部分課表為疲勞下衝線 75 分鐘</td></tr>
+<tr><th scope="row">11/29（日）</th><td>本次資料無預排課表</td><td>本次資料無預排課表</td></tr>
+</tbody></table></div>
+<p><strong>場地短距離</strong>　這次同步資料未查到本週預排課表，請以教練通知為準。</p>
+</section>
 </main>
 <script>
 (async()=>{
@@ -112,7 +128,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 </script>
 <script>
 function showParentPanel(){
- const ids=['home','team-dues','monthly-reports','race-calendar','team-calendar'];
+ const ids=['home','team-dues','monthly-reports','race-calendar','team-calendar','training'];
  const fragment=location.hash.slice(1);
  const selected=ids.includes(fragment)?fragment:'home';
  for(const id of ids) document.getElementById(id).hidden=id!==selected;
