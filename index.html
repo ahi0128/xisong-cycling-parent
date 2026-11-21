@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>家長隊費說明｜西松高中自由車隊</title>
+<title>台北市立西松高中自由車隊</title>
 <link rel="stylesheet" href="./style.css">
 <style>
 main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.amount{font-size:clamp(27px,5vw,42px);font-weight:800;color:#b3f7da;margin-top:12px}.hero a{color:#b3f7da}.actions{margin-top:12px}td:last-child,th:last-child{text-align:right;min-width:100px}td,th{padding:9px}p{margin:8px 0}article{margin-top:14px}@media print{@page{size:A4;margin:12mm}body,main{background:white;margin:0;padding:0;font-size:12px}h1{font-size:25px}h2{font-size:16px}.hero{padding:10px;background:white;color:#10292e;border:1px solid #aaa}.hero p,.amount{color:#10292e}.hero:after,.actions{display:none}.amount{font-size:24px}.card{padding:8px;break-inside:avoid}td,th{padding:5px}p{line-height:1.4}.tablewrap{overflow:visible}section+section{margin-top:7px}}
 #race-events{overflow-x:auto}#race-events table{min-width:710px}#race-events th,#race-events td{text-align:left;vertical-align:top}#race-events tbody tr:nth-child(even){background:#f4f8f7}#race-events td:last-child{min-width:110px}#race-events small{display:block;line-height:1.45;margin-top:4px;color:#405559}#race-events a{display:block;margin-bottom:5px}#race-events .closed{color:#8d3a22}
+.parent-panel[hidden]{display:none}.parent-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.parent-nav a,.shortcut{text-decoration:none;color:#10282e}.parent-nav a{padding:9px 12px;border:1px solid #b8cac6;border-radius:8px;background:white}.parent-nav a[aria-current]{color:white;background:#176358}.shortcut{display:block;margin-bottom:10px}.shortcut:hover{border-color:#176358}.shortcut strong,.shortcut span{display:block}.shortcut span{margin-top:5px;color:#405559}.team-header h1{margin:0}@media print{.parent-nav{display:none}}
 </style>
 <link rel="manifest" href="./app.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -15,9 +16,19 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 </head>
 <body>
 <main>
+<header class="hero team-header"><h1>台北市立西松高中自由車隊</h1></header>
+<nav class="parent-nav" aria-label="家長資訊">
+<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#race-calendar">比賽行事曆</a>
+</nav>
+<div id="home" class="parent-panel">
+<a class="card shortcut" href="#team-dues"><strong>隊費說明</strong><span>查閱分攤依據與年度概算</span></a>
+<a class="card shortcut" href="#monthly-reports"><strong>收支月報</strong><span>查看已發布的收入、支出與餘額</span></a>
+<a class="card shortcut" href="#race-calendar"><strong>比賽行事曆</strong><span>查比賽日期、報名截止與公告</span></a>
+</div>
+<div id="team-dues" class="parent-panel" hidden>
 <section class="hero">
 <span class="pill">家長討論稿 · 金額待確認</span>
-<h1>西松高中自由車隊｜隊費說明</h1>
+<h2>隊費說明</h2>
 <div class="amount">每戶每月約 2,299 元</div>
 <p>以 18 戶、12 個月及全年 48 次週六訓練估算。</p>
 <div class="actions"><button type="button" onclick="print()">列印／另存 PDF</button></div>
@@ -46,18 +57,34 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <p>收入與支出會登錄帳本。支出核對憑證後入帳，家長可查看已發布的收支月報。</p>
 <p class="hint">本頁供家長討論。隊費金額、收款主體、繳納方式及相關程序待校方與家長確認後另行通知。</p>
 </section>
-<section class="card" id="monthly-reports">
+</div>
+<section class="card parent-panel" id="monthly-reports" hidden>
 <h2>已發布的收支月報</h2>
 <p>管理員發布月報後，重新開啟本頁即可查看最新摘要。查看最新月報需要網路。</p>
 <p><a href="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary">直接開啟收支摘要</a></p>
 <iframe title="西松自由車隊已發布的收支月報" src="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary" referrerpolicy="no-referrer" style="display:block;width:100%;height:480px;border:1px solid #dce5e7;border-radius:10px"></iframe>
 </section>
-<section class="card" id="race-calendar">
+<section class="card parent-panel" id="race-calendar" hidden>
 <h2>國內比賽行事曆</h2>
 <p>公路與場地賽的公開公告。車隊報名與帶隊安排另行確認。</p>
 <div id="race-events" tabindex="0" role="region" aria-label="賽程表，可左右滑動" aria-live="polite">載入賽程中…</div>
 </section>
 </main>
+<script>
+function showParentPanel(){
+ const ids=['home','team-dues','monthly-reports','race-calendar'];
+ const fragment=location.hash.slice(1);
+ const selected=ids.includes(fragment)?fragment:'home';
+ for(const id of ids) document.getElementById(id).hidden=id!==selected;
+ for(const link of document.querySelectorAll('.parent-nav a')){
+  if(link.hash==='#'+selected)link.setAttribute('aria-current','page');
+  else link.removeAttribute('aria-current');
+ }
+ window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',showParentPanel);
+showParentPanel();
+</script>
 <script>
 (async () => {
  const list = document.getElementById('race-events');
