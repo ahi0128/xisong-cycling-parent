@@ -244,6 +244,27 @@ showParentPanel();
    for(const key of ['opening','income','expense','closing'])row.insertCell().textContent=formatter.format(month[key])+' 元';
   }
   panel.append(table);
+  for(const month of [...reports].reverse()){
+   if(!Array.isArray(month.details)||!month.details.length)continue;
+   const disclosure=document.createElement('details');
+   const summary=document.createElement('summary');
+   summary.textContent=month.month+' 已公開交易明細';
+   disclosure.append(summary);
+   const listing=document.createElement('table');
+   const headers=listing.createTHead().insertRow();
+   for(const label of ['日期','類型','用途','金額']){
+    const cell=document.createElement('th');
+    cell.scope='col';cell.textContent=label;headers.append(cell);
+   }
+   const rows=listing.createTBody();
+   for(const item of month.details){
+    const row=rows.insertRow();
+    for(const value of [item.date,item.kind==='income'?'收入':'支出',item.category,formatter.format(item.amount)+' 元']){
+     row.insertCell().textContent=value;
+    }
+   }
+   disclosure.append(listing);panel.append(disclosure);
+  }
  }catch{panel.textContent='暫時無法載入月報，請連線後重新整理。'}
 })();
 </script>
