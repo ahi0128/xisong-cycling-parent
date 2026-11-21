@@ -51,7 +51,43 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <p><a href="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary">直接開啟收支摘要</a></p>
 <iframe title="西松自由車隊已發布的收支月報" src="https://xisong-cycling-workstation.alightmole9.chatgpt.site/summary" referrerpolicy="no-referrer" style="display:block;width:100%;height:480px;border:1px solid #dce5e7;border-radius:10px"></iframe>
 </section>
+<section class="card" id="race-calendar">
+<h2>國內比賽行事曆</h2>
+<p>公路與場地賽的公開公告。車隊報名與帶隊安排另行確認。</p>
+<div id="race-events" aria-live="polite">載入賽程中…</div>
+</section>
 </main>
+<script>
+(async () => {
+ const list = document.getElementById('race-events');
+ try {
+  const response = await fetch('./races.json', {cache:'no-store'});
+  if (!response.ok) throw new Error('無法載入賽程');
+  const {events} = await response.json();
+  const today = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
+  const upcoming = events.filter(event => (event.end || event.start) >= today)
+   .sort((a,b) => a.start.localeCompare(b.start));
+  list.textContent = upcoming.length ? '' : '目前沒有已核實的近期賽程。';
+  for (const event of upcoming) {
+   const article = document.createElement('article');
+   const title = document.createElement('h3');
+   title.textContent = event.title;
+   const detail = document.createElement('p');
+   const dates = event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start;
+   detail.textContent = [dates,event.discipline,event.venue,event.status].filter(Boolean).join(' · ');
+   article.append(title,detail);
+   const url = new URL(event.source);
+   if (url.protocol === 'https:') {
+    const link = document.createElement('a');
+    link.href = url.href;
+    link.textContent = '主辦單位公告';
+    article.append(link);
+   }
+   list.append(article);
+  }
+ } catch { list.textContent = '目前無法載入賽程，請連線後重新整理。'; }
+})();
+</script>
 <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(console.error);</script>
 </body>
 </html>
