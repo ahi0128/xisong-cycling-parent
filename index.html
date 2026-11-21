@@ -75,7 +75,21 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
    const detail = document.createElement('p');
    const dates = event.displayDate || (event.end && event.end !== event.start ? event.start + ' 至 ' + event.end : event.start);
    detail.textContent = [dates,event.discipline,event.venue,event.status].filter(Boolean).join(' · ');
-   article.append(title,detail);
+   const registration = document.createElement('p');
+   const deadline = event.registrationDeadline;
+   const note = event.registrationNote || (deadline ? '' : '報名期限待公告');
+   const deadlineText = deadline ? '截止 ' + deadline + '（' + (deadline < today ? '已截止' : deadline === today ? '今天截止' : '請留意期限') + '）' : '';
+   registration.textContent = '報名｜' + [deadlineText,note].filter(Boolean).join(' · ');
+   article.append(title,detail,registration);
+   if (event.registrationUrl) {
+    const registrationUrl = new URL(event.registrationUrl);
+    if (registrationUrl.protocol === 'https:') {
+     const registrationLink = document.createElement('a');
+     registrationLink.href = registrationUrl.href;
+     registrationLink.textContent = '報名資訊';
+     registration.append(' · ',registrationLink);
+    }
+   }
    const url = new URL(event.source);
    if (url.protocol === 'https:') {
     const link = document.createElement('a');
