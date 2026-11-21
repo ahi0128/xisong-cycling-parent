@@ -82,7 +82,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <div id="team-events" role="status">載入車隊賽程中…</div>
 <p><a href="#race-calendar">查看國內公開賽事與報名資訊</a></p>
 </section>
-<section class="card parent-panel" id="training" hidden>
+<section class="card parent-panel" id="training" data-week-start="2026-11-23" data-week-end="2026-11-29" hidden>
 <h2>訓練公告｜11/23–11/29</h2>
 <p>2026 年 11 月 23 日至 29 日預排課表，整理自 Intervals.icu 訓練週報系統的 11/21 同步資料。實際安排以教練通知為準。</p>
 <div class="tablewrap" tabindex="0" role="region" aria-label="本週預排課表">
@@ -127,6 +127,15 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 })();
 </script>
 <script>
+const trainingPanel = document.getElementById('training');
+const taipeiDay = new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
+if (taipeiDay < trainingPanel.dataset.weekStart || taipeiDay > trainingPanel.dataset.weekEnd) {
+ const heading = document.createElement('h2');
+ heading.textContent = '訓練公告';
+ const message = document.createElement('p');
+ message.textContent = '目前尚無當週已發布的訓練課表。';
+ trainingPanel.replaceChildren(heading,message);
+}
 function showParentPanel(){
  const ids=['home','team-dues','monthly-reports','race-calendar','team-calendar','training'];
  const fragment=location.hash.slice(1);
