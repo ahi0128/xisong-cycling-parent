@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 355,
-      "income": 7526,
-      "expense": 505,
-      "closing": 7376,
+      "income": 26,
+      "expense": 5,
+      "closing": 376,
       "details": [
         {
           "date": "2026-11-19",
@@ -43,24 +43,6 @@
           "kind": "expense",
           "category": "補給飲水",
           "amount": 3
-        },
-        {
-          "date": "2026-11-22",
-          "kind": "income",
-          "category": "隊費",
-          "amount": 2500
-        },
-        {
-          "date": "2026-11-22",
-          "kind": "expense",
-          "category": "補給飲水",
-          "amount": 500
-        },
-        {
-          "date": "2026-11-22",
-          "kind": "income",
-          "category": "隊費",
-          "amount": 5000
         }
       ]
     }
