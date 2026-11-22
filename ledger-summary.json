@@ -18,7 +18,7 @@
         {
           "date": "2026-11-19",
           "kind": "expense",
-          "category": "補給飲水",
+          "category": "麵包",
           "amount": 2,
           "note": "測試"
         },
@@ -32,7 +32,7 @@
         {
           "date": "2026-11-20",
           "kind": "income",
-          "category": "其他收入",
+          "category": "香蕉",
           "amount": 3,
           "note": "測試"
         },
@@ -46,7 +46,7 @@
         {
           "date": "2026-11-21",
           "kind": "expense",
-          "category": "補給飲水",
+          "category": "麵包",
           "amount": 3,
           "note": "測試"
         },
@@ -60,21 +60,21 @@
         {
           "date": "2026-11-22",
           "kind": "income",
-          "category": "隊費",
+          "category": "隊費(測試)",
           "amount": 100,
           "note": "測試"
         },
         {
           "date": "2026-11-22",
           "kind": "expense",
-          "category": "補給飲水",
+          "category": "飲水",
           "amount": 100,
           "note": "測試"
         },
         {
           "date": "2026-11-22",
           "kind": "expense",
-          "category": "其他支出",
+          "category": "香蕉",
           "amount": 50,
           "note": "測試"
         },
