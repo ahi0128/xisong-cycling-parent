@@ -4,51 +4,65 @@
     {
       "month": "2026-11",
       "opening": 355,
-      "income": 2526,
+      "income": 2626,
       "expense": 5,
-      "closing": 2876,
+      "closing": 2976,
       "details": [
         {
           "date": "2026-11-19",
           "kind": "income",
           "category": "隊費",
-          "amount": 8
+          "amount": 8,
+          "note": "測試"
         },
         {
           "date": "2026-11-19",
           "kind": "expense",
           "category": "補給飲水",
-          "amount": 2
+          "amount": 2,
+          "note": "測試"
         },
         {
           "date": "2026-11-20",
           "kind": "income",
           "category": "隊費",
-          "amount": 10
+          "amount": 10,
+          "note": "測試"
         },
         {
           "date": "2026-11-20",
           "kind": "income",
           "category": "其他收入",
-          "amount": 3
+          "amount": 3,
+          "note": "測試"
         },
         {
           "date": "2026-11-21",
           "kind": "income",
           "category": "隊費",
-          "amount": 5
+          "amount": 5,
+          "note": "測試"
         },
         {
           "date": "2026-11-21",
           "kind": "expense",
           "category": "補給飲水",
-          "amount": 3
+          "amount": 3,
+          "note": "測試"
         },
         {
           "date": "2026-11-22",
           "kind": "income",
           "category": "隊費",
-          "amount": 2500
+          "amount": 2500,
+          "note": "測試"
+        },
+        {
+          "date": "2026-11-22",
+          "kind": "income",
+          "category": "隊費",
+          "amount": 100,
+          "note": "測試"
         }
       ]
     }
