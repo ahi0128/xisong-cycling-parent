@@ -5,8 +5,8 @@
       "month": "2026-11",
       "opening": 355,
       "income": 2626,
-      "expense": 105,
-      "closing": 2876,
+      "expense": 155,
+      "closing": 2826,
       "details": [
         {
           "date": "2026-11-19",
@@ -69,6 +69,13 @@
           "kind": "expense",
           "category": "補給飲水",
           "amount": 100,
+          "note": "測試"
+        },
+        {
+          "date": "2026-11-22",
+          "kind": "expense",
+          "category": "其他支出",
+          "amount": 50,
           "note": "測試"
         }
       ]
