@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 355,
-      "income": 2926,
+      "income": 3625,
       "expense": 155,
-      "closing": 3126,
+      "closing": 3825,
       "details": [
         {
           "date": "2026-11-19",
@@ -81,8 +81,8 @@
         {
           "date": "2026-11-22",
           "kind": "income",
-          "category": "其他收入",
-          "amount": 300,
+          "category": "隊費",
+          "amount": 999,
           "note": "測試"
         }
       ]
