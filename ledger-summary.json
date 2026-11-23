@@ -5,8 +5,17 @@
       "month": "2026-11",
       "opening": 0,
       "income": 0,
-      "expense": 0,
-      "closing": 0
+      "expense": 1,
+      "closing": -1,
+      "details": [
+        {
+          "date": "2026-11-24",
+          "kind": "expense",
+          "category": "測試",
+          "amount": 1,
+          "note": ""
+        }
+      ]
     }
   ]
 }
