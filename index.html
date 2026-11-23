@@ -117,12 +117,29 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 </section>
 </main>
 <script>
-(async()=>{
+(()=>{
  const list=document.getElementById('team-events');
+ let pending=false;
+ async function readTeamEvents(){
+  const urls=[
+   'https://raw.githubusercontent.com/ahi0128/xisong-cycling-parent/main/team-races.json?v='+Date.now(),
+   './team-races.json'
+  ];
+  for(const url of urls){
+   try{
+    const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(5000)});
+    if(!response.ok)continue;
+    const {events}=await response.json();
+    if(Array.isArray(events))return events;
+   }catch{}
+  }
+  throw new Error('Team race feed unavailable');
+ }
+ async function refreshTeamEvents(){
+ if(location.hash!=='#team-calendar'||document.hidden||pending)return;
+ pending=true;
  try{
-  const result=await fetch('./team-races.json',{cache:'no-store'});
-  if(!result.ok)throw new Error();
-  const {events}=await result.json();
+  const events=await readTeamEvents();
   const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
   const upcoming=events.filter(event=>(event.end||event.start)>=today).sort((a,b)=>a.start.localeCompare(b.start));
   list.textContent=upcoming.length?'':'目前尚無已公告的車隊參賽行程。';
@@ -142,6 +159,11 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
   }
   list.append(table);
  }catch{list.textContent='暫時無法載入車隊賽程，請連線後重新整理。'}
+ finally{pending=false}
+ }
+ window.addEventListener('hashchange',refreshTeamEvents);
+ document.addEventListener('visibilitychange',refreshTeamEvents);
+ refreshTeamEvents();
 })();
 </script>
 <script>
