@@ -30,6 +30,17 @@
       "discipline": "綜合賽會",
       "registrationNote": "報名期限待公告",
       "source": "https://www.t-sports.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=8f05f64e7b7dee029f9b887c16336b39&id=502f4edfb925e407&mserno=80f554463f3ffb1cdf8c2eca4d6fe9ec"
+    },
+    {
+      "title": "116 年全國運動會",
+      "start": "2027-11-13",
+      "end": "2027-11-18",
+      "venue": "屏東縣主辦",
+      "discipline": "綜合賽會",
+      "registrationDeadline": "2027-09-10",
+      "registrationNote": "全運會大會註冊截止，各縣市選拔與內部期限另訂",
+      "registrationUrl": "https://tc.edu.tw/news-file/6afd67096fb6a9864f0d4ef2.cab",
+      "source": "https://tc.edu.tw/news-file/6afd67096fb6a9864f0d4ef2.cab"
     }
   ]
 }
