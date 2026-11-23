@@ -9,6 +9,7 @@
 main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.amount{font-size:clamp(27px,5vw,42px);font-weight:800;color:#b3f7da;margin-top:12px}.hero a{color:#b3f7da}.actions{margin-top:12px}td:last-child,th:last-child{text-align:right;min-width:100px}td,th{padding:9px}p{margin:8px 0}article{margin-top:14px}@media print{@page{size:A4;margin:12mm}body,main{background:white;margin:0;padding:0;font-size:12px}h1{font-size:25px}h2{font-size:16px}.hero{padding:10px;background:white;color:#10292e;border:1px solid #aaa}.hero p,.amount{color:#10292e}.hero:after,.actions{display:none}.amount{font-size:24px}.card{padding:8px;break-inside:avoid}td,th{padding:5px}p{line-height:1.4}.tablewrap{overflow:visible}section+section{margin-top:7px}}
 #race-events{overflow-x:auto}#race-events table{min-width:710px}#race-events th,#race-events td{text-align:left;vertical-align:top}#race-events tbody tr:nth-child(even){background:#f4f8f7}#race-events td:last-child{min-width:110px}#race-events small{display:block;line-height:1.45;margin-top:4px;color:#405559}#race-events a{display:block;margin-bottom:5px}#race-events .closed{color:#8d3a22}
 .parent-panel[hidden]{display:none}.parent-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.parent-nav a,.shortcut{text-decoration:none;color:#10282e}.parent-nav a{padding:9px 12px;border:1px solid #b8cac6;border-radius:8px;background:white}.parent-nav a[aria-current]{color:white;background:#176358}.shortcut{display:block;margin-bottom:10px}.shortcut:hover{border-color:#176358}.shortcut strong,.shortcut span{display:block}.shortcut span{margin-top:5px;color:#405559}.team-header h1{margin:0}@media print{.parent-nav{display:none}}
+#excel-reports .ledger-income{color:#166534;font-weight:700}#excel-reports .ledger-expense{color:#991b1b;font-weight:700}
 </style>
 <link rel="manifest" href="./app.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -259,7 +260,11 @@ showParentPanel();
   for(const month of [...reports].reverse()){
    const row=body.insertRow();
    row.insertCell().textContent=month.month;
-   for(const key of ['opening','income','expense','closing'])row.insertCell().textContent=formatter.format(month[key])+' 元';
+   for(const key of ['opening','income','expense','closing']){
+    const cell=row.insertCell();
+    cell.textContent=formatter.format(month[key])+' 元';
+    if(key==='income'||key==='expense')cell.classList.add('ledger-'+key);
+   }
   }
   panel.append(table);
   for(const month of [...reports].reverse()){
@@ -284,6 +289,9 @@ showParentPanel();
     for(const value of [item.date,item.kind==='income'?'收入':'支出',item.category,formatter.format(item.amount)+' 元',item.note||'']){
      row.insertCell().textContent=value;
     }
+    const style=item.kind==='income'?'ledger-income':'ledger-expense';
+    row.cells[1].classList.add(style);
+    row.cells[3].classList.add(style);
    }
    disclosure.append(listing);panel.append(disclosure);
   }
