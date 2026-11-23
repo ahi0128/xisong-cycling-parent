@@ -4,17 +4,10 @@
     {
       "month": "2026-11",
       "opening": 0,
-      "income": 150,
+      "income": 139,
       "expense": 37,
-      "closing": 113,
+      "closing": 102,
       "details": [
-        {
-          "date": "2026-11-23",
-          "kind": "income",
-          "category": "隊費",
-          "amount": 10,
-          "note": "測試"
-        },
         {
           "date": "2026-11-23",
           "kind": "expense",
@@ -48,13 +41,6 @@
           "kind": "income",
           "category": "果膠",
           "amount": 35,
-          "note": "測試"
-        },
-        {
-          "date": "2026-11-23",
-          "kind": "income",
-          "category": "憑證上傳測試",
-          "amount": 1,
           "note": "測試"
         },
         {
