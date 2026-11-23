@@ -5,8 +5,8 @@
       "month": "2026-11",
       "opening": 0,
       "income": 5,
-      "expense": 1,
-      "closing": 4,
+      "expense": 6,
+      "closing": -1,
       "details": [
         {
           "date": "2026-11-24",
@@ -19,6 +19,13 @@
           "date": "2026-11-24",
           "kind": "income",
           "category": "測試2",
+          "amount": 5,
+          "note": "測試"
+        },
+        {
+          "date": "2026-11-24",
+          "kind": "expense",
+          "category": "水壺",
           "amount": 5,
           "note": "測試"
         }
