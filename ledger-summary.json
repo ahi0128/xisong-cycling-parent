@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 0,
-      "income": 10028,
+      "income": 7528,
       "expense": 6,
-      "closing": 10022,
+      "closing": 7522,
       "details": [
         {
           "date": "2026-11-24",
@@ -42,13 +42,6 @@
           "category": "隊費",
           "amount": 13,
           "note": "測試"
-        },
-        {
-          "date": "2026-11-24",
-          "kind": "income",
-          "category": "隊費（2026-11）",
-          "amount": 2500,
-          "note": ""
         },
         {
           "date": "2026-11-24",
