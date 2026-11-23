@@ -10,6 +10,19 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 #race-events{overflow-x:auto}#race-events table{min-width:710px}#race-events th,#race-events td{text-align:left;vertical-align:top}#race-events tbody tr:nth-child(even){background:#f4f8f7}#race-events td:last-child{min-width:110px}#race-events small{display:block;line-height:1.45;margin-top:4px;color:#405559}#race-events a{display:block;margin-bottom:5px}#race-events .closed{color:#8d3a22}
 .parent-panel[hidden]{display:none}.parent-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.parent-nav a,.shortcut{text-decoration:none;color:#10282e}.parent-nav a{padding:9px 12px;border:1px solid #b8cac6;border-radius:8px;background:white}.parent-nav a[aria-current]{color:white;background:#176358}.shortcut{display:block;margin-bottom:10px}.shortcut:hover{border-color:#176358}.shortcut strong,.shortcut span{display:block}.shortcut span{margin-top:5px;color:#405559}.team-header h1{margin:0}@media print{.parent-nav{display:none}}
 #excel-reports .ledger-income{color:#166534;font-weight:700}#excel-reports .ledger-expense{color:#991b1b;font-weight:700}
+@media screen{
+ :root{background:#fff2df;color:#392219;--line:#ead2ba;--ink:#392219;--green:#963b26}
+ .hero{background:#813621}
+ .hero:after{border-color:#bd7158;box-shadow:0 0 0 18px #95472f,0 0 0 20px #ad634b,0 0 0 38px #95472f,0 0 0 40px #ab624a}
+ .hero p{color:#ffe9d1}
+ .amount,.hero a{color:#ffdfac}
+ .team-header .site-label{margin:0 0 .35rem;color:#ffdfac;font-size:.85rem;font-weight:700}
+ .parent-nav a,.shortcut{color:#642e1c}
+ .parent-nav a{border-color:#d8b8a0;background:#fffaf2}
+ .parent-nav a[aria-current]{color:#fff;background:#963b26;border-color:#963b26}
+ .shortcut:hover{border-color:#963b26}
+ th{background:#f8e6d2}
+}
 </style>
 <link rel="manifest" href="./app.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
@@ -17,7 +30,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 </head>
 <body>
 <main>
-<header class="hero team-header"><h1>台北市立西松高中自由車隊</h1></header>
+<header class="hero team-header"><p class="site-label">家長資訊</p><h1>台北市立西松高中自由車隊</h1></header>
 <nav class="parent-nav" aria-label="家長資訊">
 <a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#training">訓練公告</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a>
 </nav>
