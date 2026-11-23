@@ -5,24 +5,8 @@
       "month": "2026-11",
       "opening": 0,
       "income": 0,
-      "expense": 20,
-      "closing": -20,
-      "details": [
-        {
-          "date": "2026-11-23",
-          "kind": "expense",
-          "category": "獨木舟",
-          "amount": 10,
-          "note": "測試用"
-        },
-        {
-          "date": "2026-11-23",
-          "kind": "expense",
-          "category": "SUP",
-          "amount": 10,
-          "note": "TEST"
-        }
-      ]
+      "expense": 0,
+      "closing": 0
     }
   ]
 }
