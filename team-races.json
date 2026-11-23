@@ -1,6 +1,17 @@
 {
   "events": [
     {
+      "title": "全國自由車公路計時錦標賽暨國手選拔",
+      "start": "2026-12-19",
+      "end": "2026-12-19",
+      "venue": "花東",
+      "discipline": "公路計時",
+      "registrationDeadline": "2026-11-08",
+      "registrationNote": "96 好動客",
+      "registrationUrl": "https://www.96sporter.com/event_detail134.htm",
+      "source": "https://cycling.org.tw/wp-content/uploads/2026/07/115%E5%B9%B4%E5%85%A8%E5%9C%8B%E8%87%AA%E7%94%B1%E8%BB%8A%E5%85%AC%E8%B7%AF%E8%A8%88%E6%99%82%E9%8C%A6%E6%A8%99%E8%B3%BD%E6%9A%A8%E5%9C%8B%E6%89%8B%E9%81%B8%E6%8B%94%E7%AB%B6%E8%B3%BD%E8%A6%8F%E7%A8%8B-%E5%85%AC%E5%91%8A.pdf"
+    },
+    {
       "title": "全國自由車公路錦標賽暨國手選拔",
       "start": "2026-12-20",
       "end": "2026-12-20",
