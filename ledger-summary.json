@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 0,
-      "income": 99,
+      "income": 0,
       "expense": 37,
-      "closing": 62,
+      "closing": -37,
       "details": [
         {
           "date": "2026-11-23",
@@ -27,13 +27,6 @@
           "kind": "expense",
           "category": "汽水",
           "amount": 12,
-          "note": "測試"
-        },
-        {
-          "date": "2026-11-23",
-          "kind": "income",
-          "category": "隊費",
-          "amount": 99,
           "note": "測試"
         }
       ]
