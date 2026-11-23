@@ -5,16 +5,9 @@
       "month": "2026-11",
       "opening": 0,
       "income": 160,
-      "expense": 81,
-      "closing": 79,
+      "expense": 37,
+      "closing": 123,
       "details": [
-        {
-          "date": "2026-11-23",
-          "kind": "expense",
-          "category": "香蕉",
-          "amount": 44,
-          "note": "測試"
-        },
         {
           "date": "2026-11-23",
           "kind": "income",
