@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 0,
-      "income": 155,
+      "income": 160,
       "expense": 86,
-      "closing": 69,
+      "closing": 74,
       "details": [
         {
           "date": "2026-11-23",
@@ -83,6 +83,13 @@
           "kind": "income",
           "category": "憑證上傳測試",
           "amount": 1,
+          "note": "測試"
+        },
+        {
+          "date": "2026-11-23",
+          "kind": "income",
+          "category": "測試系統",
+          "amount": 5,
           "note": "測試"
         }
       ]
