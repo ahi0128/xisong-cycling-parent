@@ -32,7 +32,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <main>
 <header class="hero team-header"><p class="site-label">家長資訊</p><h1>台北市立西松高中自由車隊</h1></header>
 <nav class="parent-nav" aria-label="家長資訊">
-<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#training">訓練公告</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a><a href="#international-calendar">國際賽事</a>
+<a href="#home">首頁</a><a href="#team-dues">隊費說明</a><a href="#monthly-reports">收支月報</a><a href="#training">訓練公告</a><a href="#attendance-info">差勤公告</a><a href="#team-calendar">車隊參賽</a><a href="#race-calendar">國內賽事</a><a href="#international-calendar">國際賽事</a>
 </nav>
 <div id="home" class="parent-panel">
 <a class="card shortcut" href="#team-dues"><strong>隊費說明</strong><span>查看每月隊費與年度概算</span></a>
@@ -40,6 +40,7 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <a class="card shortcut" href="#training"><strong>訓練公告</strong><span>查看本週預排課表</span></a>
 <a class="card shortcut" href="#team-calendar"><strong>車隊參賽行事曆</strong><span>查看西松確認參加的比賽</span></a>
 <a class="card shortcut" href="#race-calendar"><strong>國內比賽行事曆</strong><span>查比賽日期、報名截止與公告</span></a>
+<a class="card shortcut" href="#attendance-info"><strong>差勤公告</strong><span>查看訓練出缺勤及聯繫方式</span></a>
 <a class="card shortcut" href="#international-calendar"><strong>國際比賽行事曆</strong><span>查看比賽日期、官方賽程及直播資訊</span></a>
 </div>
 <div id="team-dues" class="parent-panel" hidden>
@@ -103,6 +104,11 @@ main{max-width:850px;margin:auto;padding:20px}section+section{margin-top:14px}.a
 <h2>已發布的收支月報</h2>
 <div class="tablewrap" id="excel-reports" role="status">載入月報中…</div>
 
+</section>
+<section class="card parent-panel" id="attendance-info" hidden>
+<h2>車隊差勤公告</h2>
+<p>教練會按訓練時段登錄到課、請假、缺課、遲到及早退。需要請假、提早離隊或核對個人差勤時，請透過原有的車隊聯絡管道通知教練，並告知日期與訓練時段。</p>
+<p>個別差勤由教練私下與家長確認。</p>
 </section>
 <section class="card parent-panel" id="international-calendar" hidden>
 <h2>國際自由車賽事</h2>
@@ -203,7 +209,7 @@ if(previewDay && taipeiDay >= previewDay && taipeiDay < weekStart){
  trainingPanel.replaceChildren(heading,message);
 }
 function showParentPanel(){
- const ids=['home','team-dues','monthly-reports','race-calendar','international-calendar','team-calendar','training'];
+ const ids=['home','team-dues','monthly-reports','race-calendar','international-calendar','team-calendar','training','attendance-info'];
  const fragment=location.hash.slice(1);
  const selected=ids.includes(fragment)?fragment:'home';
  for(const id of ids) document.getElementById(id).hidden=id!==selected;
