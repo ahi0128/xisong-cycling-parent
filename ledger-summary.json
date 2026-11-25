@@ -5,8 +5,8 @@
       "month": "2026-11",
       "opening": 0,
       "income": 28,
-      "expense": 6,
-      "closing": 22,
+      "expense": 211,
+      "closing": -183,
       "details": [
         {
           "date": "2026-11-24",
@@ -42,6 +42,13 @@
           "category": "隊費",
           "amount": 13,
           "note": "測試"
+        },
+        {
+          "date": "2026-11-25",
+          "kind": "expense",
+          "category": "香蕉",
+          "amount": 205,
+          "note": "補給"
         }
       ]
     }
