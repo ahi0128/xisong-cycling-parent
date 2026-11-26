@@ -4,9 +4,9 @@
     {
       "month": "2026-11",
       "opening": 0,
-      "income": 28,
+      "income": 7528,
       "expense": 211,
-      "closing": -183,
+      "closing": 7317,
       "details": [
         {
           "date": "2026-11-24",
@@ -45,10 +45,31 @@
         },
         {
           "date": "2026-11-25",
+          "kind": "income",
+          "category": "隊費（2026-11）",
+          "amount": 2500,
+          "note": ""
+        },
+        {
+          "date": "2026-11-25",
+          "kind": "income",
+          "category": "隊費（2026-11）",
+          "amount": 2500,
+          "note": ""
+        },
+        {
+          "date": "2026-11-25",
           "kind": "expense",
           "category": "香蕉",
           "amount": 205,
           "note": "補給"
+        },
+        {
+          "date": "2026-11-25",
+          "kind": "income",
+          "category": "隊費（2026-12）",
+          "amount": 2500,
+          "note": ""
         }
       ]
     }
